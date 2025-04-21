@@ -134,6 +134,21 @@
         </button>
       </ng-template>
     </imx-icon-tile>
+    <imx-icon-tile
+      data-imx-identifier="start-tile-request-account-sponsor-role"
+      [caption]="'#LDS#Request Account Sponsor Role' | translate"
+      [subtitle]="'#LDS#Request Account Sponsor Role for yourself or for others.' | translate"
+      [image]="'cart'"
+      [identifier]="'request-account-sponsor-role'"
+      *ngIf="ShowNewRequestLink()"
+    >
+      <ng-template #ActionTemplate>
+        <button mat-button color="primary" [attr.data-imx-identifier]="'imx-start-button-new-request'" (click)="GoToProductSelection()">
+          <span>{{ '#LDS#Request products' | translate }}</span>
+          <eui-icon size="m" icon="forward"></eui-icon>
+        </button>
+      </ng-template>
+    </imx-icon-tile>
 
     <imx-tile
       data-imx-identifier="start-tile-it-shop-approval-inquiries"
