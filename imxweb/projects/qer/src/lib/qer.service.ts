@@ -63,21 +63,20 @@ export class QerService {
 
   /** This method defines the menu structure for the portal. */
   private setupMenu(): void {
-    // this.menuService.addMenuFactories(
-    //   //TODO later #206706
-    //   (preProps: string[], __: string[]) => {
-    //     if (!preProps.includes('ITSHOP')) {
-    //       return null;
-    //     }
-
-    //     return {
-    //       id: 'ROOT_RelatedApplications',
-    //       title: '#LDS#Related applications',
-    //       sorting: '100',
-    //       // TODO (TFS number 805756): get from API; has a tree structure
-    //       items: [].map(relatedApplication => new RelatedApplicationMenuItem(relatedApplication))
-    //     };
-    //   }
-    // );
+    this.menuService.addMenuFactories(
+      (preProps: string[], __: string[]) => {
+        return {
+          id: 'ROOT_SAMPLES',
+          title: '#LDS#Samples',
+          items: [
+            {
+              id: 'SAMPLE_IDENTITIES',
+              route: 'identities',
+              title: '#LDS#Identities'
+            },
+          ],
+        };
+      }
+    );
   }
 }

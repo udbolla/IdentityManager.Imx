@@ -61,6 +61,7 @@ import { TilesModule } from './tiles/tiles.module';
 import { UserModule } from './user/user.module';
 import { ShoppingCartValidationDetailModule } from './shopping-cart-validation-detail/shopping-cart-validation-detail.module';
 import { RoleMembershipsModule } from './role-management/role-memberships/role-memberships.module';
+import { SampleIdentitiesComponent } from './sample-identity/sample-identities/sample-identities.component';
 
 export function initConfig(config: QerService): () => Promise<any> {
   return () =>
@@ -79,6 +80,13 @@ const routes: Routes = [
     canActivate: [RouteGuardService],
     resolve: [RouteGuardService],
   },
+  {
+    path: 'identities',
+    component: SampleIdentitiesComponent,
+    canActivate: [RouteGuardService],
+    resolve: [RouteGuardService],
+  },
+  // uma
 ];
 
 // @dynamic

@@ -30,7 +30,7 @@
 
 export const environment = {
   production: false,
-  clientUrl: 'http://localhost:8182',
+  clientUrl: 'https://ashsd95011.vbechtel.com/APIServer',
   appName: 'qer-app-portal',
   appVersion: '1.0.0'
 };
