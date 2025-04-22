@@ -6,7 +6,7 @@ import { SampleIdentitiesComponent } from './sample-identities/sample-identities
 
 @NgModule({
   declarations: [
-    SampleIdentitiesComponent
+    SampleIdentitiesComponent, Sample
   ],
   imports: [
     CommonModule
