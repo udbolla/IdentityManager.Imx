@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SampleIdentitiesComponent } from './sample-identities.component';
 
 describe('SampleIdentitiesComponent', () => {

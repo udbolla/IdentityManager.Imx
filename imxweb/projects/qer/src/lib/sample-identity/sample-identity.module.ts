@@ -1,15 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
+import { EuiCoreModule, EuiMaterialModule } from '@elemental-ui/core';
+import { DataSourceToolbarModule, DataTableModule, LdsReplaceModule, QbmModule} from 'qbm';
 import { SampleIdentitiesComponent } from './sample-identities/sample-identities.component';
 
 
 
 @NgModule({
   declarations: [
-    SampleIdentitiesComponent, Sample
+    SampleIdentitiesComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonModule,
+    TranslateModule,
+    LdsReplaceModule,
+    EuiCoreModule,
+    EuiMaterialModule,
+    DataSourceToolbarModule,
+    DataTableModule,
+    QbmModule
   ],
   exports: [
     SampleIdentitiesComponent
