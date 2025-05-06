@@ -3,6 +3,7 @@ import {EuiLoadingService} from '@elemental-ui/core';
 import {CollectionLoadParameters, DisplayColumns, EntitySchema, IClientProperty, ValType} from 'imx-qbm-dbts';
 import { DataSourceToolbarFilter, DataSourceToolbarSettings } from 'qbm';
 import { QerApiService } from '../../qer-api-client.service';
+import { OverlayRef } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'CCC-sample-identities',
@@ -14,10 +15,10 @@ export class SampleIdentitiesComponent implements OnInit {
   public readonly schema: EntitySchema;
   public readonly DisplayColumns = DisplayColumns;
   public navigationState: CollectionLoadParameters = { PageSize: 20 };
-
   private displayedColumns: IClientProperty[] = [];
+  private filterOptions: DataSourceToolbarFilter[];
 
-  constructor(private readonly qerApiClient: QerApiService) {
+  constructor(private readonly qerApiClient: QerApiService,private readonly busyService: EuiLoadingService) {
     this.schema = this.qerApiClient.typedClient.PortalPersonAll.GetSchema();
     this.displayedColumns = [
       this.schema.Columns[DisplayColumns.DISPLAY_PROPERTYNAME],
@@ -28,8 +29,13 @@ export class SampleIdentitiesComponent implements OnInit {
       }
     ];
   }
-
+  public async onSearch(keywords: string): Promise<void> {
+    this.navigationState.StartIndex = 0;
+    this.navigationState.search = keywords;
+    await this.navigate();
+  }
   public async ngOnInit(): Promise<void> {
+    this.filterOptions = (await this.qerApiClient.client.portal_person_all_datamodel_get())?.Filters;
     await this.navigate();
   }
 
@@ -41,6 +47,8 @@ export class SampleIdentitiesComponent implements OnInit {
   }
 
   private async navigate(): Promise<void> {
+    let busyIndicator: OverlayRef = this.busyService.show();
+    try {
     const data = await this.qerApiClient.typedClient.PortalPersonAll.Get(this.navigationState);
 
     this.dstSettings = {
@@ -48,11 +56,10 @@ export class SampleIdentitiesComponent implements OnInit {
       dataSource: data,
       entitySchema: this.schema,
       navigationState: this.navigationState,
+      filters: this.filterOptions,
     };
+  } finally {
+    this.busyService.hide(busyIndicator);
   }
-  public async onSearch(keywords: string): Promise<void> {
-    this.navigationState.StartIndex = 0;
-    this.navigationState.search = keywords;
-    await this.navigate();
-  }
+}
 }
